@@ -9,25 +9,13 @@ var app = new Vue({
                 logo: 'images/quadro-tatico-esportes.png',
                 value: 'com.prancheta.quadrotaticodeesportes',
                 link: 'https://play.google.com/store/apps/details?id=com.prancheta.quadrotaticodeesportes'
-            },
-            {
-                title: 'Quadro Tático de Futsal', 
-                logo: 'images/quadro-tatico-futsal.png',
-                value: 'com.prancheta.quadrotaticodefutsal',
-                link: 'https://play.google.com/store/apps/details?id=com.prancheta.quadrotaticodefutsal'
-            },
-            {
-                title: 'Tabela de Futebol',
-                logo: 'images/tabela-de-futebol.png',
-                value: 'com.prancheta.tabeladefutebol',
-                link: 'https://play.google.com/store/apps/details?id=com.prancheta.tabeladefutebol'
             }
         ],
         contacts: [
             {
                 icon: 'fa fa-home',
                 title: 'Play Store',
-                value: 'play.google.com/store/apps/dev?id=7964185345858453468',
+                value: 'play.google.com/prancheta-apps',
                 link: 'https://play.google.com/store/apps/dev?id=7964185345858453468'
             },
             {
