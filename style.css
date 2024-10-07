@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'Oswald';
+    src: url('fonts/Oswald-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    padding: 1rem;
+    background-color: #f1f7ee;
+}
+
+h2 {
+    margin-top: 3rem;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.contact {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.app {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    img {
+        border-radius: 0.625rem;
+        border: 0.1rem solid #47373a;
+        background: #fff;
+    }
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: #47373a;
+    margin-top: 1rem;
+}
+
+.fa-home {
+    color: #EC2049;
+}
+
+.fa-linkedin {
+    color: #2056ec;
+}
+
+.fa-github {
+    color: #000;
+}
+
+.fa-envelope {
+    color: #14c43a;
+}
+
+@media (max-width: 768px) {
+    .header {
+        justify-content: center;
+        text-align: center;
+    }
+}
