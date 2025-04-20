@@ -64,14 +64,14 @@ var app = new Vue({
                 id: 'poupemais',
                 title: 'Poupe Mais',
                 logo: 'https://play-lh.googleusercontent.com/lT2mcFsX-NnYOBouwnIWCrnqlOhHO5wvwxr9zF-BHjgXFBPH5tID4g6MejLMd5IVYjA=w240-h480-rw',
-                description: 'Atuo como dev. Backend na solução, além de cuidar de toda a arquitetura, serviços e coordenação da equipe.',
+                description: '',
                 link: 'https://poupemais.app'
             },
             {
                 id: 'quadrotatico',
                 title: 'Quadro Tático de Esportes',
                 logo: 'https://play-lh.googleusercontent.com/pEgNGZah82kFq3yjoamLSx4DRgUoqi3HKA5t0GK7NMV-r5De_AaS0nHJkRBqLOTtB1U=s256-rw',
-                description: 'Trabalho pessoal, onde desenvolvi um quadro tático útil para diversos esportes, como futebol, basquete e outros.',
+                description: '',
                 link: 'https://play.google.com/store/apps/details?id=com.prancheta.quadrotaticodeesportes'
             }
         ],
