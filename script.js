@@ -30,7 +30,7 @@ var app = new Vue({
                 id: 'comeia-1',
                 title: 'Desenvolvedor Frontend Junior',
                 company: 'Comeia Labs',
-                time: 'Jan. 2023 - Dez. 2023',
+                time: 'Jan. 2022 - Dez. 2022',
             }
         ],
         internships: [
