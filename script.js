@@ -36,10 +36,10 @@ var app = new Vue({
                 link: 'https://mandaru.com'
             },
             {
-                id: 'quadro_tatico',
-                title: 'Quadro Tático de Esportes',
-                value: 'play.google.com/quadro-tatico-de-esportes',
-                link: 'https://play.google.com/store/apps/details?id=com.prancheta.quadrotaticodeesportes'
+                id: 'prancheta_apps',
+                title: 'Prancheta Apps',
+                value: 'play.google.com/prancheta-apps',
+                link: 'https://play.google.com/store/apps/dev?id=7964185345858453468'
             }
         ]
     }
