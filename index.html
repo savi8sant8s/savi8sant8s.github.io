@@ -5,32 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sávio Santos</title>
-    <meta name="description" content="Portfólio de Sávio Santos, desenvolvedor web.">
-    <meta name="keywords" content="Sávio, Santos, Dev">
+    <meta name="description" content="Sávio Santos - Dev, Software Engineer, Engenheiro de Software">
+    <meta name="keywords" content="Sávio, Santos, Dev, Software Engineer, Engenheiro de Software">
     <meta name="author" content="Sávio Santos">
     <meta name="google-site-verification" content="XDFtSx9oMw1M2j-C8J17hmN_p31TvWkSJvrzgchCV3A" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
     <div id="app" class="container">
-        <div class="header">
-            <img class="logo" src="images/logo.jpeg" alt="Sávio Santos" width="100" height="100">
-            <div>
-                <h1>{{title}}</h1>
-                <p>{{subtitle}}</p>
-            </div>
+        <div class="language-toggle">
+            <button 
+                @click="toggleLanguage" 
+                class="lang-btn"
+                :class="{ active: currentLanguage === 'pt' }"
+                :title="translations[currentLanguage].switchLanguage"
+            >
+                <i class="fas fa-globe"></i>
+                <span>{{ currentLanguage === 'pt' ? 'EN' : 'PT' }}</span>
+            </button>
         </div>
-        <section>
-            <div class="contacts">
-                <div class="contact" v-for="contact in contacts" :key="contact.id">
-                    <strong>{{contact.title}}:</strong><br />
-                    <a :href="contact.link" target="_blank">{{contact.value}}</a>
+
+        <header class="header" :class="{ 'fade-in': isLoaded }">
+            <div class="profile-section">
+                <div class="image-wrapper">
+                    <img class="logo" src="images/logo.jpeg" alt="Sávio Santos" loading="lazy">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="profile-info">
+                    <h1 class="name">{{translations[currentLanguage].title}}</h1>
+                    <p class="subtitle">{{translations[currentLanguage].subtitle}}</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="contacts-section" :class="{ 'fade-in': isLoaded }">
+            <h2 class="section-title">{{translations[currentLanguage].contactsTitle}}</h2>
+            <div class="contacts-grid">
+                <div 
+                    class="contact-card" 
+                    v-for="(contact, index) in contacts" 
+                    :key="contact.id"
+                    :style="{ animationDelay: (index * 0.1) + 's' }"
+                >
+                    <div class="contact-icon">
+                        <i :class="contact.icon"></i>
+                    </div>
+                    <div class="contact-info">
+                        <strong class="contact-title">{{contact.title}}:</strong>
+                        <a :href="contact.link" target="_blank" class="contact-link" rel="noopener noreferrer">
+                            {{contact.value}}
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <footer class="footer" :class="{ 'fade-in': isLoaded }">
+            <p>&copy; {{year}} Sávio Santos. {{translations[currentLanguage].footer}}</p>
+        </footer>
     </div>
 </body>
 <script src="script.js"></script>
