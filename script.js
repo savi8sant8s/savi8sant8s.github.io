@@ -7,7 +7,7 @@ var app = new Vue({
         translations: {
             pt: {
                 title: 'Sávio Santos',
-                subtitle: 'Engenheiro de Software, mestrando em Engenharia da Computação, com experiência em desenvolvimento frontend, mobile e backend, especialmente nas tecnologias Vue.js, Next.js, Express e Nest.js. Atualmente atuando em P&D com Inteligência Artificial, focado em visão computacional e modelos de linguagem.',
+                subtitle: 'Engenheiro de Software, mestre em Engenharia da Computação, com experiência em desenvolvimento frontend, mobile e backend, especialmente nas tecnologias Vue.js, Next.js, Express e Nest.js. Atualmente atuando em P&D com Inteligência Artificial, focado em visão computacional e modelos de linguagem.',
                 footer: 'Todos os direitos reservados.',
                 switchLanguage: 'Alterar idioma'
             },
