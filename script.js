@@ -13,7 +13,7 @@ var app = new Vue({
             },
             en: {
                 title: 'Sávio Santos',
-                subtitle: 'Software Engineer, pursuing a Master\'s degree in Computer Engineering, with experience in frontend, mobile, and backend development, especially in Vue.js, Next.js, Express, and Nest.js technologies. Currently working in R&D with Artificial Intelligence, focused on computer vision and language models.',
+                subtitle: 'Software Engineer, Master in Computer Engineering, with experience in frontend, mobile, and backend development, especially in Vue.js, Next.js, Express, and Nest.js technologies. Currently working in R&D with Artificial Intelligence, focused on computer vision and language models.',
                 footer: 'All rights reserved.',
                 switchLanguage: 'Switch language'
             }
