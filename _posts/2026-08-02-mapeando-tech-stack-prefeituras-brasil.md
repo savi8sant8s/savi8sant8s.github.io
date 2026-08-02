@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Mapeando a Tech Stack de 5.571 Prefeituras do Brasil: Um Estudo com Python e Async I/O"
 author: Sávio Santos
 excerpt: "Analisamos mais de 5.500 sites de prefeituras brasileiras para descobrir quais linguagens, CMS, servidores web e frameworks dominam a gestão pública municipal."
