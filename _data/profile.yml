@@ -1,0 +1,29 @@
+eyebrow: Portfólio e blog
+name: Sávio Santos
+subtitle: Engenheiro de Software, Mestre em Engenharia da Computação, com experiência em frontend, mobile e backend. Atualmente atuando em P&D com Inteligência Artificial, focado em visão computacional e modelos de linguagem.
+about: Desenvolvo produtos e pesquisas em software com foco em aplicações web, mobile e back-end. Este site reúne minhas informações profissionais, contatos e artigos técnicos.
+contacts:
+  - title: E-mail
+    value: savi8sant8s@gmail.com
+    link: mailto:savi8sant8s@gmail.com
+    icon: fas fa-envelope
+  - title: GitHub
+    value: github.com/savi8sant8s
+    link: https://github.com/savi8sant8s
+    icon: fab fa-github
+  - title: LinkedIn
+    value: linkedin.com/in/savi8sant8s
+    link: https://linkedin.com/in/savi8sant8s
+    icon: fab fa-linkedin
+  - title: ORCID
+    value: 0000-0002-4707-6948
+    link: https://orcid.org/0000-0002-4707-6948
+    icon: fab fa-orcid
+  - title: Prancheta Apps
+    value: play.google.com/prancheta-apps
+    link: https://play.google.com/store/apps/dev?id=7964185345858453468
+    icon: fab fa-google-play
+  - title: Lattes
+    value: lattes.cnpq.br/3364432948507529
+    link: https://lattes.cnpq.br/3364432948507529
+    icon: fas fa-file-alt
