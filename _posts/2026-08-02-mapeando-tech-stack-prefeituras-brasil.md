@@ -9,52 +9,13 @@ Você já parou para pensar em qual tecnologia roda nos sites dos municípios do
 
 Para responder a essa pergunta com dados reais, desenvolvi um **inspector de tecnologia assíncrono em Python** capaz de coletar, resolver domínios e analisar a *tech stack* de todas as **5.571 prefeituras catalogadas pelo IBGE**.
 
-Neste artigo, compartilho os bastidores da engenharia por trás do projeto, o reconhecimento aos projetos comunitários de dados abertos e a análise detalhada dos resultados obtidos.
-
----
-
-## 🤝 Créditos e Bases de Dados Abertos
-
-Construir um projeto dessa escala exige reconhecer o excelente trabalho da comunidade de software livre e dados abertos no Brasil:
-
-- **API de Localidades do IBGE**: Utilizada para obter a lista oficial e completa dos 5.571 municípios brasileiros com seus respectivos códigos geográficos e UFs.
-- **Dataset [`sites_prefeituras`](https://github.com/franklinbaldo/sites_prefeituras)**: Um agradecimento especial ao repositório mantido por **[Franklin Baldo](https://github.com/franklinbaldo)**. A base pré-catalogada de URLs de prefeituras fornecida pelo projeto serviu como ponto de partida crucial para acelerar a resolução de domínios atípicos.
-
----
-
-## 🛠️ A Engenharia por Trás do Crawler (3 Minutos para 5.570 Sites)
-
-Varrer mais de 5.500 domínios com checagem de respostas HTTP, parsing de cabeçalhos e análise de HTML pode levar horas se feito de forma síncrona. 
-
-Para resolver o problema da escala e da performance, a arquitetura do projeto foi estruturada em módulos desacoplados:
-
-1. **Coleta de Dados e Resolução de Domínios**:
-   - Integração com a API do IBGE + cruzamento com o dataset de **Franklin Baldo**.
-   - Algoritmo de normalização e permutação de URLs (`.gov.br`, `pm...gov.br`, sem conectores *de/da/do*).
-
-2. **I/O Assíncrono com `aiohttp` e `asyncio`**:
-   - Utilização de `asyncio.Semaphore` para controlar a concorrência sem sobrecarregar a rede ou a resolução DNS local.
-   - Ajuste de *connect timeout* para 2.5s, descartando rapidamente domínios inativos sem travar o worker.
-   - Com concorrência em **100 requisições simultâneas**, o pipeline completo executou em **apenas 2 minutos e 40 segundos** (uma taxa de ~30 sites/segundo).
-
-3. **Tech Inspector (Fingerprinting)**:
-   - Inspeção de cabeçalhos HTTP (`X-Powered-By`, `Server`, `Set-Cookie`, `X-Generator`).
-   - Parsing do HTML com `BeautifulSoup` em busca de meta tags, caminhos de scripts estáticos (`wp-content`, `sites/all/themes`) e objetos em memória de frameworks SPA/SSR (`__NEXT_DATA__`, `__NUXT__`).
+Neste artigo, compartilho os principais achados do estudo, os gráficos com as estatísticas nacionais e os detalhes técnicos do crawler que desenvolvi.
 
 ---
 
 ## 📊 Principais Descobertas e Análise dos Dados
 
 Dos **5.571 municípios** catalogados pelo IBGE, o crawler localizou e analisou com sucesso **5.107 prefeituras ativas (91,67% de taxa de resolução)**.
-
-### ⚠️ E os 8,33% que Não Foram Raspados?
-
-Cerca de **464 prefeituras (8,33%)** não puderam ter sua *tech stack* raspada ou identificada. As principais razões encontradas foram:
-1. **Domínios Inativos ou Inexistentes**: Pequenos municípios sem portal oficial próprio ativo no momento da varredura.
-2. **Bloqueios de Segurança e WAF / Rate Limit**: Firewalls institucionais que rejeitaram conexões automáticas sem User-Agent de navegador comum ou que bloquearam requisições em lote.
-3. **Erros de SSL/TLS e Portais Fora do Ar**: Certificados digitais expirados ou servidores temporariamente fora de serviço durante o scraping.
-
----
 
 ### 1. PHP é o Rei Absoluto do Backend Municipal
 Ao analisar as linguagens e linguagens server-side identificadas:
@@ -96,6 +57,46 @@ Em termos de Gerenciadores de Conteúdo (CMS):
 - **jQuery**: Ainda acompanha **55,5% (2.836 sites)**.
 - **Elementor**: O page builder visual do WordPress foi detectado em **551 prefeituras (10,8%)**, facilitando a edição por equipes municipais sem conhecimento técnico de código.
 - **React & Vue.js**: Apresentam adoção em crescimento (5,2% e 2,0% respectivamente), impulsionados por novos portais de transparência construídos como Single Page Applications (SPAs).
+
+---
+
+## 🛠️ A Engenharia por Trás do Crawler (3 Minutos para 5.570 Sites)
+
+Varrer mais de 5.500 domínios com checagem de respostas HTTP, parsing de cabeçalhos e análise de HTML pode levar horas se feito de forma síncrona. 
+
+Para resolver o problema da escala e da performance, a arquitetura do projeto foi estruturada em módulos desacoplados:
+
+1. **Coleta de Dados e Resolução de Domínios**:
+   - Integração com a API do IBGE + cruzamento com dados abertos da comunidade.
+   - Algoritmo de normalização e permutação de URLs (`.gov.br`, `pm...gov.br`, sem conectores *de/da/do*).
+
+2. **I/O Assíncrono com `aiohttp` e `asyncio`**:
+   - Utilização de `asyncio.Semaphore` para controlar a concorrência sem sobrecarregar a rede ou a resolução DNS local.
+   - Ajuste de *connect timeout* para 2.5s, descartando rapidamente domínios inativos sem travar o worker.
+   - Com concorrência em **100 requisições simultâneas**, o pipeline completo executou em **apenas 2 minutos e 40 segundos** (uma taxa de ~30 sites/segundo).
+
+3. **Tech Inspector (Fingerprinting)**:
+   - Inspeção de cabeçalhos HTTP (`X-Powered-By`, `Server`, `Set-Cookie`, `X-Generator`).
+   - Parsing do HTML com `BeautifulSoup` em busca de meta tags, caminhos de scripts estáticos (`wp-content`, `sites/all/themes`) e objetos em memória de frameworks SPA/SSR (`__NEXT_DATA__`, `__NUXT__`).
+
+---
+
+## ⚠️ Limitações da Pesquisa: Os 8,33% Não Raspados
+
+Cerca de **464 prefeituras (8,33%)** não puderam ter sua *tech stack* raspada ou identificada durante esta edição da pesquisa. As razões observadas foram:
+
+1. **Domínios Inativos ou Inexistentes**: Pequenos municípios que não possuem portal próprio oficial ativo no momento da varredura.
+2. **Bloqueios de Segurança (WAF / Rate Limit)**: Firewalls que rejeitam requisições automatizadas em lote sem navegação completa de browser.
+3. **Erros de SSL/TLS & Servidores Fora do Ar**: Certificados com erro de cadeia ou servidores temporariamente inalcançáveis.
+
+---
+
+## 🤝 Créditos e Fontes de Dados Abertos
+
+Construir um estudo dessa magnitude exige reconhecer o trabalho fundamental da comunidade de dados abertos no Brasil:
+
+- **API de Localidades do IBGE**: Fonte dos dados cadastrais dos 5.571 municípios.
+- **Dataset [`sites_prefeituras`](https://github.com/franklinbaldo/sites_prefeituras)**: Crédito e agradecimento especial ao projeto mantido por **[Franklin Baldo](https://github.com/franklinbaldo)**. A base pré-catalogada de URLs municipais acelerou significativamente a resolução de domínios.
 
 ---
 
