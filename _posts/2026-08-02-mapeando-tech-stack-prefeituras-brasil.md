@@ -9,7 +9,16 @@ Você já parou para pensar em qual tecnologia roda nos sites dos municípios do
 
 Para responder a essa pergunta com dados reais, desenvolvi um **inspector de tecnologia assíncrono em Python** capaz de coletar, resolver domínios e analisar a *tech stack* de todas as **5.571 prefeituras catalogadas pelo IBGE**.
 
-Neste artigo, compartilho os bastidores da engenharia por trás do projeto e a análise detalhada dos resultados obtidos.
+Neste artigo, compartilho os bastidores da engenharia por trás do projeto, o reconhecimento aos projetos comunitários de dados abertos e a análise detalhada dos resultados obtidos.
+
+---
+
+## 🤝 Créditos e Bases de Dados Abertos
+
+Construir um projeto dessa escala exige reconhecer o excelente trabalho da comunidade de software livre e dados abertos no Brasil:
+
+- **API de Localidades do IBGE**: Utilizada para obter a lista oficial e completa dos 5.571 municípios brasileiros com seus respectivos códigos geográficos e UFs.
+- **Dataset [`sites_prefeituras`](https://github.com/franklinbaldo/sites_prefeituras)**: Um agradecimento especial ao repositório mantido por **[Franklin Baldo](https://github.com/franklinbaldo)**. A base pré-catalogada de URLs de prefeituras fornecida pelo projeto serviu como ponto de partida crucial para acelerar a resolução de domínios atípicos.
 
 ---
 
@@ -20,8 +29,7 @@ Varrer mais de 5.500 domínios com checagem de respostas HTTP, parsing de cabeç
 Para resolver o problema da escala e da performance, a arquitetura do projeto foi estruturada em módulos desacoplados:
 
 1. **Coleta de Dados e Resolução de Domínios**:
-   - Integração com a API de Localidades do IBGE para obter a lista oficial de municípios.
-   - Cruzamento com datasets de dados abertos do GitHub (`franklinbaldo/sites_prefeituras`).
+   - Integração com a API do IBGE + cruzamento com o dataset de **Franklin Baldo**.
    - Algoritmo de normalização e permutação de URLs (`.gov.br`, `pm...gov.br`, sem conectores *de/da/do*).
 
 2. **I/O Assíncrono com `aiohttp` e `asyncio`**:
@@ -38,6 +46,15 @@ Para resolver o problema da escala e da performance, a arquitetura do projeto fo
 ## 📊 Principais Descobertas e Análise dos Dados
 
 Dos **5.571 municípios** catalogados pelo IBGE, o crawler localizou e analisou com sucesso **5.107 prefeituras ativas (91,67% de taxa de resolução)**.
+
+### ⚠️ E os 8,33% que Não Foram Raspados?
+
+Cerca de **464 prefeituras (8,33%)** não puderam ter sua *tech stack* raspada ou identificada. As principais razões encontradas foram:
+1. **Domínios Inativos ou Inexistentes**: Pequenos municípios sem portal oficial próprio ativo no momento da varredura.
+2. **Bloqueios de Segurança e WAF / Rate Limit**: Firewalls institucionais que rejeitaram conexões automáticas sem User-Agent de navegador comum ou que bloquearam requisições em lote.
+3. **Erros de SSL/TLS e Portais Fora do Ar**: Certificados digitais expirados ou servidores temporariamente fora de serviço durante o scraping.
+
+---
 
 ### 1. PHP é o Rei Absoluto do Backend Municipal
 Ao analisar as linguagens e linguagens server-side identificadas:
