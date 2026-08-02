@@ -1,0 +1,7 @@
+title: Sávio Santos
+description: Blog e portfólio de Sávio Santos
+lang: pt-BR
+markdown: kramdown
+permalink: /:categories/:title/
+plugins:
+  - jekyll-feed

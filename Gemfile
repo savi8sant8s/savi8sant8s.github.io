@@ -1,0 +1,9 @@
+source "https://rubygems.org"
+
+gem "base64"
+gem "csv"
+gem "bigdecimal"
+gem "jekyll", "~> 4.3.4"
+gem "jekyll-feed"
+gem "jekyll-seo-tag"
+gem "webrick"

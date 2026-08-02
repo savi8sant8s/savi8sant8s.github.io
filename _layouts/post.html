@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<article class="post-card">
+  <header class="post-header">
+    <p class="post-meta">
+      {{ page.date | date: "%d/%m/%Y" }}
+      {% if page.author %} · {{ page.author }}{% endif %}
+    </p>
+    <h2 class="post-heading">{{ page.title }}</h2>
+    {% if page.excerpt %}
+    <p class="post-excerpt">{{ page.excerpt }}</p>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

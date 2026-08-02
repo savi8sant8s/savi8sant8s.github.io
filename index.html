@@ -1,3 +1,8 @@
+---
+layout: none
+title: Sávio Santos
+permalink: /
+---
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -15,6 +20,7 @@
 </head>
 
 <body>
+    {% raw %}
     <div id="app" class="container">
         <div class="language-toggle">
             <button 
@@ -37,6 +43,7 @@
                 <div class="profile-info">
                     <h1 class="name">{{translations[currentLanguage].title}}</h1>
                     <p class="subtitle">{{translations[currentLanguage].subtitle}}</p>
+                    <a class="blog-link" href="/blog/">Ver blog e artigos</a>
                 </div>
             </div>
         </header>
@@ -67,6 +74,7 @@
             <p>&copy; {{year}} Sávio Santos. {{translations[currentLanguage].footer}}</p>
         </footer>
     </div>
+    {% endraw %}
 </body>
 <script src="script.js"></script>
 

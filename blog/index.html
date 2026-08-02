@@ -1,0 +1,27 @@
+---
+layout: default
+title: Blog
+description: Artigos, notas técnicas e publicações.
+permalink: /blog/
+---
+
+<section class="post-list">
+  {% assign posts = site.posts %}
+  {% if posts.size > 0 %}
+    {% for post in posts %}
+      <article class="post-card post-card-list">
+        <p class="post-meta">{{ post.date | date: "%d/%m/%Y" }}</p>
+        <h2 class="post-heading">
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </h2>
+        {% if post.excerpt %}
+        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 180 }}</p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  {% else %}
+    <article class="post-card">
+      <p>Sem posts ainda. Crie um arquivo em <strong>_posts</strong> para publicar o primeiro artigo.</p>
+    </article>
+  {% endif %}
+</section>
