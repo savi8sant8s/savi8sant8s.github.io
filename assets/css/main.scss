@@ -2,6 +2,11 @@
 # Custom CSS overrides for Minimal Mistakes theme
 ---
 
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
 /* Limit maximum height/width of images in post content */
 .page__content img {
   max-width: 100%;
