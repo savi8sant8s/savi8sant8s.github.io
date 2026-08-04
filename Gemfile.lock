@@ -151,6 +151,7 @@ PLATFORMS
   arm-linux-musl
   arm64-darwin
   x86_64-darwin
+  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -160,6 +161,7 @@ DEPENDENCIES
   csv
   jekyll (~> 4.4)
   jekyll-feed
+  jekyll-include-cache
   jekyll-seo-tag
   minimal-mistakes-jekyll
   webrick
