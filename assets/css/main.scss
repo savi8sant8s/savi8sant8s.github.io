@@ -1,0 +1,15 @@
+---
+# Custom CSS overrides for Minimal Mistakes theme
+---
+
+/* Limit maximum height/width of images in post content */
+.page__content img {
+  max-width: 100%;
+  max-height: 450px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
