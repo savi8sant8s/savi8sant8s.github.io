@@ -1,5 +1,7 @@
 title: Sávio Santos
-description: Blog e portfólio de Sávio Santos
+description: Portfólio e blog de Sávio Santos - Engenheiro de Software e Mestre focado em Inteligência Artificial, Visão Computacional e LLMs.
+url: "https://savi8sant8s.com"
+baseurl: ""
 lang: pt-BR
 markdown: kramdown
 permalink: /:categories/:title/
@@ -13,6 +15,7 @@ plugins:
   - jekyll-include-cache
   - jekyll-seo-tag
   - jekyll-remote-theme
+  - jekyll-sitemap
 
 author:
   name: "Sávio Santos"
@@ -29,6 +32,9 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://linkedin.com/in/savi8sant8s"
+    - label: "Mandaru"
+      icon: "fas fa-fw fa-globe"
+      url: "https://mandaru.com"
     - label: "ORCID"
       icon: "fab fa-fw fa-orcid"
       url: "https://orcid.org/0000-0002-4707-6948"
@@ -38,6 +44,7 @@ author:
     - label: "Lattes"
       icon: "fas fa-fw fa-file-alt"
       url: "https://lattes.cnpq.br/3364432948507529"
+
 
 defaults:
   - scope:

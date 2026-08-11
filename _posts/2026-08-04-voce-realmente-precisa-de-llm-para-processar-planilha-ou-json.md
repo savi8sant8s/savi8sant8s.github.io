@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Você realmente precisa de um LLM para processar essa planilha ou JSON?"
+title: "Você realmente precisa de um LLM para processar uma planilha ou um JSON?"
 author: Sávio Santos
 excerpt: "Por que terceirizar o processamento de dados estruturados e semi-estruturados para LLMs é ineficiente e como combinar motores determinísticos (DuckDB, JSONata) para obter 100% de precisão com custo reduzido."
 ---
