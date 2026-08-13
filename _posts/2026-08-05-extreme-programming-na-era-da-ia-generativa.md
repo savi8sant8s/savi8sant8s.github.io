@@ -17,7 +17,7 @@ Ironicamente, a IA tornou os princípios do Extreme Programming mais atuais, pr�
 
 ## ⚡ A Recontextualização dos Princípios do XP com IA
 
-### 1. Pair Programming $\rightarrow$ Desenvolvedor como Navigator, IA como Driver
+### 1. Pair Programming → Desenvolvedor como Navigator, IA como Driver
 No XP tradicional, dois desenvolvedores compartilham a mesma estação de trabalho: um *Driver* (escreve o código) e um *Navigator* (revisa em tempo real e pensa na arquitetura/cenários futuros).
 
 Com assistentes e agentes modernos:
@@ -41,7 +41,7 @@ Com assistentes e agentes modernos:
 Um dos pilares morais do XP é que falhar cedo é infinitamente mais barato do que descobrir um erro em produção. 
 
 Antes, rodar uma hipótese de arquitetura ou protótipo levava dias. Com ferramentas de geração e execução assistida:
-- O ciclo de **hipótese $\rightarrow$ código $\rightarrow$ execução $\rightarrow$ diagnóstico** cai de horas para microssegundos.
+- O ciclo de **hipótese → código → execução → diagnóstico** cai de horas para microssegundos.
 - A IA permite gerar suítes de testes de estresse, simular falhas e validar ideias em minutos. 
 - **Errar rápido e barato** tornou-se a vantagem competitiva central de quem desenvolve com agentes.
 
