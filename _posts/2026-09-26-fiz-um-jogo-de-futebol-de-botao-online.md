@@ -114,17 +114,9 @@ Alguns testes nasceram direto de relatos de testadores:
 
 ## 🚀 Deploy Barato e Teste de Carga
 
-Tudo roda numa VPS pequena (KVM 1 da Hostinger) com **Docker Compose**: o servidor Node e o **Caddy** servindo o site com HTTPS. As imagens são buildadas no GitHub Actions e publicadas no GitHub Container Registry, e a VPS só baixa e roda. Todos os workflows são manuais (deploy, rollback, backup, APK de teste), e o deploy espera as partidas em andamento terminarem antes de reiniciar o servidor.
+Tudo roda numa VPS pequena com **Docker Compose**: o servidor Node e o **Caddy** servindo o site com HTTPS. As imagens são buildadas no GitHub Actions e publicadas num registro de containers, e a VPS só baixa e roda. Todos os workflows são manuais (deploy, rollback, backup, APK de teste), e o deploy espera as partidas em andamento terminarem antes de reiniciar o servidor.
 
-Para saber quanto essa máquina aguenta, fiz um workflow de **teste de carga**: robôs num runner do GitHub jogando partidas reais contra a produção.
-
-| Partidas simultâneas | CPU do servidor | Memória |
-|:--------------------:|:---------------:|:-------:|
-| 50                   | 3 a 5%          | —       |
-| 227                  | 21%             | —       |
-| 500                  | 61,5%           | 267 MB  |
-
-A CPU encosta no limite perto de 600 partidas, então o teto ficou em **450 salas**, com uns 30% de folga. É bem mais do que um jogo indie recém-lançado precisa.
+Para saber quanto essa máquina aguenta, fiz um workflow de **teste de carga**: robôs jogando partidas reais contra o servidor, enquanto eu acompanhava CPU e memória. Como cada partida só gasta processamento na hora do chute, a máquina mais simples já aguenta algumas centenas de partidas ao mesmo tempo, bem mais do que um jogo indie recém-lançado precisa. Com esse número em mãos, o servidor ganhou um teto de salas e conexões com folga: acima dele, quem chega vê uma mensagem de servidor lotado, e quem já está jogando continua normalmente.
 
 ---
 
