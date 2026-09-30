@@ -1,19 +1,19 @@
 ---
 layout: single
-title: "Fiz um Jogo de Futebol de Botão Online: Física Determinística, Bot sem IA Treinada e Desafio Diário"
+title: "Fiz um Jogo de Futebol de Botão Online: Física Determinística, Bot sem IA Treinada, Desafio Diário e Campanha"
 author: Sávio Santos
-excerpt: "Os bastidores do Peteleco Cards, um futebol de botão online com cartas de poder: como o mesmo chute simula igual no navegador e no servidor, como o computador joga sem rede neural e como o desafio do dia garante que sempre existe solução."
+excerpt: "Os bastidores do Peteleco Cards, um futebol de botão online com cartas de poder: como o mesmo chute simula igual no navegador e no servidor, como o computador joga sem rede neural, como o desafio do dia garante que sempre existe solução e como uma campanha de 48 missões virou só configuração."
 header:
   teaser: /images/peteleco-cards/partida-super-chute.jpg
 ---
 
 Quem cresceu no Brasil provavelmente jogou futebol de botão na mesa da cozinha. Eu queria esse jogo no celular, só que online e com um tempero a mais: **cartas de poder**. Daí nasceu o **[Peteleco Cards](https://petelecocards.com.br)**.
 
-A ideia é simples: você mira, puxa o botão como um estilingue e dá o peteleco. A cada turno ganha energia para gastar em cartas como **Super Chute**, **Congelamento**, **Paredão** e **Bomba de Várzea**. Quem fizer dois gols primeiro vence, em partidas de no máximo três minutos.
+A ideia é simples: você mira, puxa o botão como um estilingue e dá o peteleco. A cada turno ganha energia para gastar em cartas como **Super Chute**, **Congelamento**, **Paredão** e **Bomba de Várzea**. Quem fizer dois gols primeiro vence, em partidas de no máximo três minutos. Contra o computador dá para jogar um jogo único ou uma série melhor de 3, e na **Rota do Brasil** você atravessa o país do Norte ao Sul, liberando times pelo caminho.
 
 ![Partida do Peteleco Cards com o rastro de fogo do Super Chute](/images/peteleco-cards/partida-super-chute.jpg)
 
-Neste artigo, conto as decisões técnicas mais interessantes do projeto: a física que precisa dar o mesmo resultado em qualquer lugar, um adversário de computador que joga sem nenhum modelo treinado, e um desafio diário que nunca sai impossível.
+Neste artigo, conto as decisões técnicas mais interessantes do projeto: a física que precisa dar o mesmo resultado em qualquer lugar, um adversário de computador que joga sem nenhum modelo treinado, um desafio diário que nunca sai impossível e uma campanha inteira montada com dados, sem código novo por missão.
 
 ---
 
@@ -101,6 +101,26 @@ As partes técnicas mais divertidas:
 
 ---
 
+## 🗺️ Rota do Brasil: uma Campanha Feita de Configuração
+
+Contra o computador faltava um motivo para jogar a próxima partida. A resposta foi uma campanha no estilo das missões de jogos de futebol mobile: **48 paradas** pelo mapa do Brasil, cada uma com rival, campo, objetivo e nível próprios, e até três estrelas por parada (vencer, não sofrer gol e ganhar em até dois minutos). Vencer um rival pela primeira vez libera o time dele, e no fim da viagem estão **Os Gigantes**.
+
+O truque foi não escrever uma regra especial por missão. Cada parada é uma linha de configuração:
+
+```ts
+{ region: 'nordeste', rival: 'timbu', field: 'gramado', objective: 'gol_com_carta', level: 'medio', card: 'super_chute' }
+```
+
+E cada objetivo vira um `MatchSetup`, que ajusta a partida antes de ela começar: **gol único** muda o número de gols para vencer, **virada** começa o placar em 1 a 0 para o rival, **sem cartas** esvazia a sua mão, **rival com energia cheia** mexe na energia inicial e **tempo curto** corta para 90 segundos sem gol de ouro. O `MatchRunner` não sabe que existe uma campanha; ele só recebe uma partida com outro ponto de partida.
+
+### Três campos, a mesma física
+
+Os campos **terrão** e **molhado** não ganharam um simulador próprio. Cada um é só uma porcentagem aplicada sobre os ajustes de física da partida: no terrão, o freio do botão vai a 160% e o da bola a 240%; no molhado, caem para 55% e 60%. Como o campo entra nos ajustes com que a partida começou, o servidor re-simula igual e o replay do painel sai idêntico, sem nenhuma linha nova no código de validação.
+
+O progresso (estrelas, times e campos liberados) fica no aparelho e no servidor, que junta os dois lados pela melhor nota de cada parada. Para ninguém liberar a campanha inteira com uma requisição, parada nova só é aceita na ordem e no ritmo de uma a cada 45 segundos.
+
+---
+
 ## 🧪 Testes para uma Física que Muda Toda Semana
 
 Balancear um jogo de física significa mexer em números o tempo todo, e cada ajuste pode quebrar algo que funcionava. Por isso o core tem uma suíte de testes com **Vitest** cobrindo regras, cartas, simulador, replay, bot, ajustes e desafio, que roda antes de cada `git push`.
@@ -122,10 +142,10 @@ Para saber quanto essa máquina aguenta, fiz um workflow de **teste de carga**: 
 
 ## 🎮 Conclusão: Jogue e Me Diga o que Achou
 
-O que mais me surpreendeu no projeto foi quanto uma única decisão, a de **manter física e regras num core determinístico e compartilhado**, simplificou todo o resto: modo online, modo offline, bot, replay no painel, validação de partidas e o desafio diário são todos o mesmo simulador, usado de jeitos diferentes.
+O que mais me surpreendeu no projeto foi quanto uma única decisão, a de **manter física e regras num core determinístico e compartilhado**, simplificou todo o resto: modo online, modo offline, bot, replay no painel, validação de partidas, o desafio diário e os campos da Rota do Brasil são todos o mesmo simulador, usado de jeitos diferentes.
 
 O Peteleco Cards já pode ser jogado **de graça no navegador**, e a versão Android está em teste fechado na Play Store:
 
 🔗 **[petelecocards.com.br](https://petelecocards.com.br)**
 
-Tem também os vídeos curtos no **[TikTok @petelecocards](https://www.tiktok.com/@petelecocards)**. Se jogar, me conta qual carta você mais usou, ou o que te fez perder para o computador no Difícil. Isso ajuda muito no balanceamento.
+Tem também os vídeos curtos no **[YouTube @petelecocards](https://www.youtube.com/@petelecocards)** e no **[TikTok @petelecocards](https://www.tiktok.com/@petelecocards)**, e um **[Discord](https://discord.gg/uUTEYqnnAj)** onde a galera posta o código da sala para jogar online. Se jogar, me conta qual carta você mais usou, ou o que te fez perder para o computador no Difícil. Isso ajuda muito no balanceamento.
