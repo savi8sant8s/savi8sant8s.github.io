@@ -148,4 +148,4 @@ O Peteleco Cards já pode ser jogado **de graça no navegador**, e a versão And
 
 🔗 **[petelecocards.com.br](https://petelecocards.com.br)**
 
-Se jogar, me conta qual carta você mais usou, ou o que te fez perder para o computador no Difícil. Isso ajuda muito no balanceamento.
+Tem também os vídeos curtos no **[YouTube @petelecocards](https://www.youtube.com/@petelecocards)** e no **[TikTok @petelecocards](https://www.tiktok.com/@petelecocards)**, e um **[Discord](https://discord.gg/uUTEYqnnAj)** onde a galera posta o código da sala para jogar online. Se jogar, me conta qual carta você mais usou, ou o que te fez perder para o computador no Difícil. Isso ajuda muito no balanceamento.
